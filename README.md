@@ -1,5 +1,4 @@
-Simple Neural Network in C
-This is a basic neural network written from scratch in C. It solves the classic XOR problem (exclusive OR), which is a "Hello World" benchmark for neural networks because it requires the network to learn non-linear patterns.
+This is a basic neural network written from scratch in C. It solves the classic exclusive OR problem, a basic benchmark for neural networks because it requires the network to learn nonlinear patterns.
 This program implements a Multilayer Perceptron (MLP). It learns to predict outputs by adjusting internal numbers called weights over thousands of attempts.
 
 
