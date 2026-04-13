@@ -49,6 +49,22 @@ void backpropagate(double target, double output_layer[NUM_OUTPUTS], double hidde
     }
 }
 
+void update_weights(double learning_rate, double inputs[NUM_INPUTS], double hidden_layer[NUM_HIDDEN], double output_delta[NUM_OUTPUTS], double hidden_deltas[NUM_HIDDEN], double hidden_weights[NUM_INPUTS][NUM_HIDDEN], double hidden_biases[NUM_HIDDEN], double output_weights[NUM_HIDDEN][NUM_OUTPUTS], double output_biases[NUM_OUTPUTS]) {
+    for (int j = 0; j < NUM_OUTPUTS; j++) {
+        output_biases[j] += learning_rate * output_delta[j];
+        for (int i = 0; i < NUM_HIDDEN; i++) {
+            output_weights[i][j] += learning_rate * output_delta[j] * hidden_layer[i];
+        }
+    }
+
+    for (int j = 0; j < NUM_HIDDEN; j++) {
+        hidden_biases[j] += learning_rate * hidden_deltas[j];
+        for (int i = 0; i < NUM_INPUTS; i++) {
+            hidden_weights[i][j] += learning_rate * hidden_deltas[j] * inputs[i];
+        }
+    }
+}
+
 int main(void) {
     double hidden_weights[NUM_INPUTS][NUM_HIDDEN];
     double hidden_biases[NUM_HIDDEN];
