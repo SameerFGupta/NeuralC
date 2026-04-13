@@ -19,6 +19,28 @@ double dSigmoid(double x) {
     return x * (1.0 - x);
 }
 
+void forward_pass(double inputs[NUM_INPUTS],
+                  double hidden_weights[NUM_INPUTS][NUM_HIDDEN], double hidden_biases[NUM_HIDDEN],
+                  double output_weights[NUM_HIDDEN][NUM_OUTPUTS], double output_biases[NUM_OUTPUTS],
+                  double hidden_layer[NUM_HIDDEN], double output_layer[NUM_OUTPUTS]) {
+
+    for (int j = 0; j < NUM_HIDDEN; j++) {
+        double activation = hidden_biases[j];
+        for (int i = 0; i < NUM_INPUTS; i++) {
+            activation += inputs[i] * hidden_weights[i][j];
+        }
+        hidden_layer[j] = sigmoid(activation);
+    }
+
+    for (int j = 0; j < NUM_OUTPUTS; j++) {
+        double activation = output_biases[j];
+        for (int i = 0; i < NUM_HIDDEN; i++) {
+            activation += hidden_layer[i] * output_weights[i][j];
+        }
+        output_layer[j] = sigmoid(activation);
+    }
+}
+
 int main(void) {
     double hidden_weights[NUM_INPUTS][NUM_HIDDEN];
     double hidden_biases[NUM_HIDDEN];
