@@ -71,6 +71,15 @@ int main(void) {
     double output_weights[NUM_HIDDEN][NUM_OUTPUTS];
     double output_biases[NUM_OUTPUTS];
 
+    double training_inputs[4][NUM_INPUTS] = {{0.0, 0.0}, {0.0, 1.0}, {1.0, 0.0}, {1.0, 1.0}};
+    double training_outputs[4][NUM_OUTPUTS] = {{0.0}, {1.0}, {1.0}, {0.0}};
+
+    double hidden_layer[NUM_HIDDEN];
+    double output_layer[NUM_OUTPUTS];
+    double output_delta[NUM_OUTPUTS];
+    double hidden_deltas[NUM_HIDDEN];
+    double lr = 0.1;
+
     for (int i = 0; i < NUM_INPUTS; i++) {
         for (int j = 0; j < NUM_HIDDEN; j++) {
             hidden_weights[i][j] = init_weight();
@@ -89,6 +98,20 @@ int main(void) {
 
     for (int i = 0; i < NUM_OUTPUTS; i++) {
         output_biases[i] = init_weight();
+    }
+
+    for (int epoch = 0; epoch < 100000; epoch++) {
+        for (int i = 0; i < 4; i++) {
+            forward_pass(training_inputs[i], hidden_weights, hidden_biases, output_weights, output_biases, hidden_layer, output_layer);
+            backpropagate(training_outputs[i][0], output_layer, hidden_layer, output_weights, output_delta, hidden_deltas);
+            update_weights(lr, training_inputs[i], hidden_layer, output_delta, hidden_deltas, hidden_weights, hidden_biases, output_weights, output_biases);
+        }
+    }
+
+    printf("Predictions after training:\n");
+    for (int i = 0; i < 4; i++) {
+        forward_pass(training_inputs[i], hidden_weights, hidden_biases, output_weights, output_biases, hidden_layer, output_layer);
+        printf("Input: %.1f %.1f, Prediction: %f, Expected: %.1f\n", training_inputs[i][0], training_inputs[i][1], output_layer[0], training_outputs[i][0]);
     }
 
     return 0;
