@@ -41,6 +41,14 @@ void forward_pass(double inputs[NUM_INPUTS],
     }
 }
 
+void backpropagate(double target, double output_layer[NUM_OUTPUTS], double hidden_layer[NUM_HIDDEN], double output_weights[NUM_HIDDEN][NUM_OUTPUTS], double output_delta[NUM_OUTPUTS], double hidden_deltas[NUM_HIDDEN]) {
+    output_delta[0] = (target - output_layer[0]) * dSigmoid(output_layer[0]);
+
+    for (int i = 0; i < NUM_HIDDEN; i++) {
+        hidden_deltas[i] = (output_delta[0] * output_weights[i][0]) * dSigmoid(hidden_layer[i]);
+    }
+}
+
 int main(void) {
     double hidden_weights[NUM_INPUTS][NUM_HIDDEN];
     double hidden_biases[NUM_HIDDEN];
