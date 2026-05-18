@@ -132,5 +132,3 @@ Every allocation has a corresponding free. Verified clean under AddressSanitizer
 gcc -O2 -Wall -Wextra -fsanitize=address -o nn main.c data.c network.c train.c -lm
 ./nn
 ```
-
-Expected: zero errors, zero leaks.
