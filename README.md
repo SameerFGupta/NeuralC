@@ -1,6 +1,6 @@
 # Neural Network in C — MNIST Digit Classifier
 
-A multilayer perceptron (MLP) written from scratch in C. Trains on the MNIST handwritten digit dataset and achieves **>97% test accuracy** using only the standard library — no ML frameworks, no external dependencies.
+A multilayer perceptron (MLP) written from scratch in C. Trains on the MNIST handwritten digit dataset and **achieves 97%+ test accuracy** using only the standard library — no ML frameworks, no external dependencies.
 
 ---
 
