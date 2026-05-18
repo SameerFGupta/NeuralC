@@ -110,10 +110,8 @@ Epoch 20 | Loss: 0.1823 | Test Accuracy: 96.12%
 
 ## Memory
 
-Every allocation has a corresponding free. Run the full training loop under Valgrind to confirm:
+Every allocation has a corresponding free. Run the full training loop under Valgrind to confirm this:
 
 ```bash
 valgrind --leak-check=full ./nn
 ```
-
-Expected: 0 errors, 0 leaks.
